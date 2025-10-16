@@ -28,7 +28,7 @@
     /* ==== ENCABEZADO ==== */
     header {
       width: 100%;
-      background: var(--blanco);       /* Fondo blanco */
+      background: var(--blanco);
       padding: 1rem 1.2rem 0.5rem 1.2rem;
       display: flex;
       flex-direction: column;
@@ -36,7 +36,7 @@
       text-align: center;
       position: relative;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-      border-bottom: 4px solid var(--celeste); /* línea fina celeste */
+      border-bottom: 4px solid var(--celeste);
     }
 
     .logos {
@@ -81,16 +81,7 @@
       }
     }
 
-    /* ==== TÍTULO Y CONTADOR ==== */
-    .titulo {
-      text-align: center;
-      font-size: clamp(1.4rem, 4vw, 2.4rem);
-      font-weight: 600;
-      color: var(--blanco);
-      margin: 1rem 1rem 0.5rem 1rem;
-      line-height: 1.3em;
-    }
-
+    /* ==== CONTADOR ==== */
     #countdown {
       margin: 0.5rem 0 1rem 0;
       font-size: 1.4rem;
@@ -162,7 +153,6 @@
     <button class="lang-toggle" id="langBtn">EN</button>
   </header>
 
-
   <div id="countdown"></div>
 
   <section class="hero">
@@ -175,6 +165,7 @@
     <a href="https://docs.google.com/spreadsheets/d/1uISLF8Q7eZ4un2xJVCu2RGzaDfHJnuQHrl791b6Q9Vk/edit?gid=0#gid=0" target="_blank">👥 Ver Inscriptos</a>
     <a href="autoridades.pdf" target="_blank">⚖️ Autoridades del Campeonato</a>
     <a href="programa.pdf" target="_blank">📅 Programa de Actividades</a>
+    <a href="martecna.pdf" target="_blank">⛵ Alquiler de barcos</a>
   </section>
 
   <footer>
@@ -207,28 +198,27 @@
 
     // === Alternar idioma ===
     const langBtn = document.getElementById("langBtn");
-    const titulo = document.getElementById("titulo");
     const links = document.getElementById("links");
 
     const texts = {
       es: {
-        title: "Primer Panamericano de Optimist<br>Buenos Aires 2025",
         links: [
           "📄 Aviso de Regata",
           "📝 Inscripción",
           "👥 Ver Inscriptos",
           "⚖️ Autoridades del Campeonato",
-          "📅 Programa de Actividades"
+          "📅 Programa de Actividades",
+          "⛵ Alquiler de barcos"
         ]
       },
       en: {
-        title: "1st Pan American Optimist Championship<br>Buenos Aires 2025",
         links: [
           "📄 Notice of Race",
           "📝 Registration",
           "👥 Entries List",
           "⚖️ Authorities",
-          "📅 Schedule"
+          "📅 Schedule",
+          "⛵ Charter Boats"
         ]
       }
     };
@@ -236,11 +226,9 @@
     langBtn.addEventListener("click", () => {
       currentLang = currentLang === "es" ? "en" : "es";
       langBtn.textContent = currentLang === "es" ? "EN" : "ES";
-      //titulo.innerHTML = texts[currentLang].title;
       [...links.querySelectorAll("a")].forEach((a, i) => a.textContent = texts[currentLang].links[i]);
       updateCountdown();
     });
   </script>
 </body>
 </html>
-
