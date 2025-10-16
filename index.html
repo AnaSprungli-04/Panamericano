@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Primer Panamericano de Optimist – Buenos Aires 2025</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="shortcut icon" href="favicon.ico">
+
+  <style>
+    :root {
+      --azul-oscuro: #002b5c;
+      --celeste: #009fe3;
+      --blanco: #ffffff;
+    }
+
+    body {
+      font-family: "Montserrat", sans-serif;
+      margin: 0;
+      padding: 0;
+      background: var(--azul-oscuro);
+      color: var(--blanco);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ==== ENCABEZADO ==== */
+    header {
+      width: 100%;
+      background: var(--blanco);       /* Fondo blanco */
+      padding: 1rem 1.2rem 0.5rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      border-bottom: 4px solid var(--celeste); /* línea fina celeste */
+    }
+
+    .logos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .logos img {
+      height: 60px;
+      max-width: 120px;
+      object-fit: contain;
+    }
+
+    /* ==== BOTÓN IDIOMA ==== */
+    .lang-toggle {
+      background: var(--azul-oscuro);
+      color: var(--blanco);
+      border: none;
+      border-radius: 4px;
+      padding: 0.4rem 0.8rem;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: background 0.3s ease;
+      position: absolute;
+      right: 1.2rem;
+      bottom: 0.5rem;
+    }
+
+    .lang-toggle:hover {
+      background: var(--celeste);
+    }
+
+    @media (max-width: 700px) {
+      .lang-toggle {
+        position: static;
+        margin-top: 0.5rem;
+      }
+    }
+
+    /* ==== TÍTULO Y CONTADOR ==== */
+    .titulo {
+      text-align: center;
+      font-size: clamp(1.4rem, 4vw, 2.4rem);
+      font-weight: 600;
+      color: var(--blanco);
+      margin: 1rem 1rem 0.5rem 1rem;
+      line-height: 1.3em;
+    }
+
+    #countdown {
+      margin: 0.5rem 0 1rem 0;
+      font-size: 1.4rem;
+      font-weight: bold;
+      text-align: center;
+      color: var(--celeste);
+    }
+
+    /* ==== IMAGEN PRINCIPAL ==== */
+    .hero {
+      width: 90%;
+      max-width: 500px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    /* ==== ENLACES ==== */
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      width: 90%;
+      max-width: 500px;
+      margin: 1rem 0 2rem 0;
+    }
+
+    .links a {
+      text-decoration: none;
+      background: var(--celeste);
+      color: var(--blanco);
+      text-align: center;
+      padding: 0.9rem 1rem;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+
+    .links a:hover {
+      background: #0077cc;
+    }
+
+    /* ==== PIE DE PÁGINA ==== */
+    footer {
+      text-align: center;
+      background: #001f47;
+      color: var(--blanco);
+      width: 100%;
+      padding: 1.5rem 1rem;
+      font-size: 0.9rem;
+    }
+
+    footer p {
+      margin: 0.3rem 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logos">
+      <img src="logo4.png" alt="Logo 4">
+      <img src="logo2.png" alt="Logo 2">
+      <img src="logo3.png" alt="Logo 3">
+    </div>
+    <button class="lang-toggle" id="langBtn">EN</button>
+  </header>
+
+
+  <div id="countdown"></div>
+
+  <section class="hero">
+    <img src="foto_principal.jpg" alt="Optimist Panamericano 2025">
+  </section>
+
+  <section class="links" id="links">
+    <a href="nor.pdf" target="_blank">📄 Aviso de Regata</a>
+    <a href="https://forms.gle/xxxxx" target="_blank">📝 Inscripción</a>
+    <a href="inscriptos.html" target="_blank">👥 Ver Inscriptos</a>
+    <a href="autoridades.pdf" target="_blank">⚖️ Autoridades del Campeonato</a>
+    <a href="programa.pdf" target="_blank">📅 Programa de Actividades</a>
+  </section>
+
+  <footer>
+    <p><strong>Club Universitario de Buenos Aires (CUBA)</strong></p>
+    <p>Av. Cantilo 3215, Barrio de Núñez, Ciudad Autónoma de Buenos Aires</p>
+    <p>📧 regatas@cuba.org.ar | ☎️ +54 11 4703-4610</p>
+  </footer>
+
+  <script>
+    // === Contador regresivo (solo días) ===
+    const countdown = document.getElementById("countdown");
+    const targetDate = new Date("2025-12-10T00:00:00-03:00").getTime();
+    let currentLang = "es";
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+      if (distance <= 0) {
+        countdown.innerHTML = currentLang === "es"
+          ? "¡El campeonato ha comenzado!"
+          : "The championship has begun!";
+        return;
+      }
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      countdown.innerHTML = currentLang === "es"
+        ? `Faltan ${days} días`
+        : `${days} days to go`;
+    }
+    setInterval(updateCountdown, 1000);
+
+    // === Alternar idioma ===
+    const langBtn = document.getElementById("langBtn");
+    const titulo = document.getElementById("titulo");
+    const links = document.getElementById("links");
+
+    const texts = {
+      es: {
+        title: "Primer Panamericano de Optimist<br>Buenos Aires 2025",
+        links: [
+          "📄 Aviso de Regata",
+          "📝 Inscripción",
+          "👥 Ver Inscriptos",
+          "⚖️ Autoridades del Campeonato",
+          "📅 Programa de Actividades"
+        ]
+      },
+      en: {
+        title: "1st Pan American Optimist Championship<br>Buenos Aires 2025",
+        links: [
+          "📄 Notice of Race",
+          "📝 Registration",
+          "👥 Entries List",
+          "⚖️ Authorities",
+          "📅 Schedule"
+        ]
+      }
+    };
+
+    langBtn.addEventListener("click", () => {
+      currentLang = currentLang === "es" ? "en" : "es";
+      langBtn.textContent = currentLang === "es" ? "EN" : "ES";
+      //titulo.innerHTML = texts[currentLang].title;
+      [...links.querySelectorAll("a")].forEach((a, i) => a.textContent = texts[currentLang].links[i]);
+      updateCountdown();
+    });
+  </script>
+</body>
+</html>
