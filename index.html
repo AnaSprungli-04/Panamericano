@@ -39,20 +39,23 @@
       border-bottom: 4px solid var(--celeste);
     }
 
-    .logos {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1.2rem;
-      margin-bottom: 1rem;
-    }
+.logos {
+  display: flex;
+  justify-content: space-between;   /* distribuye proporcionalmente */
+  align-items: center;
+  width: 90%;
+  max-width: 500px;
+  margin: 0 auto 1rem auto;
+  gap: 1rem;
+}
 
-    .logos img {
-      height: 60px;
-      max-width: 120px;
-      object-fit: contain;
-    }
+.logos img {
+  flex: 1 1 0;
+  max-width: 30%;        /* tres logos ≈ 90% total */
+  height: auto;
+  object-fit: contain;
+}
+
 
     /* ==== BOTÓN IDIOMA ==== */
     .lang-toggle {
@@ -232,6 +235,7 @@
   </script>
 </body>
 </html>
+
 
 
 
