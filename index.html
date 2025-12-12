@@ -41,7 +41,7 @@
 
     .logos {
       display: flex;
-      justify-content: space-between;   /* tres zonas iguales */
+      justify-content: space-between;
       align-items: center;
       width: 90%;
       max-width: 500px;
@@ -49,15 +49,15 @@
     }
     
     .logos img {
-      height: 60px;         /* mantiene la altura original */
+      height: 60px;
       width: auto;
-      flex: 0 0 30%;        /* ocupa aprox. un tercio del contenedor */
+      flex: 0 0 30%;
       object-fit: contain;
     }
     
     @media (max-width: 500px) {
       .logos img {
-        flex: 0 0 28%;      /* ajusta en pantallas pequeñas */
+        flex: 0 0 28%;
         height: 50px;
       }
     }
@@ -138,8 +138,20 @@
 
     .links a.disabled {
       pointer-events: none;
-      opacity: 0.6;   /* opcional: se ve apagado */
+      opacity: 0.6;
       cursor: default;
+    }
+
+    /* ==== BOTÓN ESPECIAL TR ==== */
+    .links a.tr-link {
+      background: var(--blanco);
+      color: var(--celeste);
+      border: 2px solid var(--celeste);
+    }
+
+    .links a.tr-link:hover {
+      background: var(--celeste);
+      color: var(--blanco);
     }
 
     /* ==== PIE DE PÁGINA ==== */
@@ -174,17 +186,16 @@
   </section>
 
   <section class="links" id="links">
-    <!-- NUEVO LINK -->
+    <!-- NUEVO LINK COMO PRIMERO -->
+    <a href="https://forms.gle/7zSJ1Be7u59oVp197" target="_blank" class="tr-link">Inscripción de equipos para TR</a>
     <a href="https://cuba.roms.ar/optipanam2025/index.php/es/" target="_blank">Tablero Oficial de Avisos</a>  
     <a href="programa.pdf" target="_blank">Programa de Actividades</a>
     <a href="nor.pdf" target="_blank">Aviso de Regata</a>
-    <a href="https://mpago.la/2UGy61R" target="_blank">Link de Pago - MercadoPago</a>
+    <a href="https://mpago.la/2UGy61R" target="_blank">Link de pago - MercadoPago</a>
     <a href="https://forms.gle/2v9mbC4oWAPKWxtH9" target="_blank">Inscripción</a>
     <a href="https://docs.google.com/spreadsheets/d/1uISLF8Q7eZ4un2xJVCu2RGzaDfHJnuQHrl791b6Q9Vk/edit?gid=381396781#gid=381396781" target="_blank">Ver Inscriptos</a>
     <a href="autoridades.pdf" target="_blank">Autoridades del Campeonato</a>
-
-   </section>
-
+  </section>
 
   <footer>
     <p><strong>Club Universitario de Buenos Aires (CUBA)</strong></p>
@@ -212,6 +223,7 @@
         ? `Faltan ${days} días`
         : `${days} days to go`;
     }
+    updateCountdown();
     setInterval(updateCountdown, 1000);
 
     // === Alternar idioma ===
@@ -219,27 +231,28 @@
     const links = document.getElementById("links");
 
     const texts = {
-       es: {
+      es: {
         links: [
-          "Tablero Oficial de Avisos", // nuevo
-          "Programa de Actividades",
-          "Aviso de Regata",   // ✅ ahora con coma
-          "Link de pago - MercadoPago",
-          "Inscripción",
-          "Ver Inscriptos",
-          "Autoridades del Campeonato"
+          "Inscripción de equipos para TR", // 1
+          "Tablero Oficial de Avisos",      // 2
+          "Programa de Actividades",        // 3
+          "Aviso de Regata",                // 4
+          "Link de pago - MercadoPago",     // 5
+          "Inscripción",                    // 6
+          "Ver Inscriptos",                 // 7
+          "Autoridades del Campeonato"      // 8
         ]
       },
-
       en: {
         links: [
-          "Official Notice Board",
-          "Schedule",
-          "Notice of Race",
-          "Link de pago - MercadoPago",
-          "Registration",
-          "Entries List",
-          "Authorities"
+          "Team Registration for TR",       // 1
+          "Official Notice Board",          // 2
+          "Schedule",                       // 3
+          "Notice of Race",                 // 4
+          "Link de pago - MercadoPago",     // 5 (mantener marca)
+          "Registration",                   // 6
+          "Entries List",                   // 7
+          "Authorities"                     // 8
         ]
       }
     };
@@ -247,27 +260,13 @@
     langBtn.addEventListener("click", () => {
       currentLang = currentLang === "es" ? "en" : "es";
       langBtn.textContent = currentLang === "es" ? "EN" : "ES";
-      [...links.querySelectorAll("a")].forEach((a, i) => a.textContent = texts[currentLang].links[i]);
+      const anchors = [...links.querySelectorAll("a")];
+      // Asegurar que hay 8 anchors y 8 textos
+      for (let i = 0; i < anchors.length && i < texts[currentLang].links.length; i++) {
+        anchors[i].textContent = texts[currentLang].links[i];
+      }
       updateCountdown();
     });
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
